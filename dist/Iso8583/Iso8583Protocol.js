@@ -3,49 +3,29 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.default = void 0;
 
 var _jspos = require("jspos");
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+let {
+  IFB_NUMERIC,
+  IFB_BITMAP,
+  IFB_LLNUM,
+  IFB_LLLNUM,
+  IF_CHAR,
+  IFB_LLCHAR,
+  IFB_LLLCHAR,
+  IFB_BINARY,
+  IFB_LLBINARY,
+  IFB_LLLBINARY,
+  IFB_AMOUNT
+} = _jspos.packer;
+const pad = false;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var IFB_NUMERIC = _jspos.packer.IFB_NUMERIC,
-    IFB_BITMAP = _jspos.packer.IFB_BITMAP,
-    IFB_LLNUM = _jspos.packer.IFB_LLNUM,
-    IFB_LLLNUM = _jspos.packer.IFB_LLLNUM,
-    IF_CHAR = _jspos.packer.IF_CHAR,
-    IFB_LLCHAR = _jspos.packer.IFB_LLCHAR,
-    IFB_LLLCHAR = _jspos.packer.IFB_LLLCHAR,
-    IFB_BINARY = _jspos.packer.IFB_BINARY,
-    IFB_LLBINARY = _jspos.packer.IFB_LLBINARY,
-    IFB_LLLBINARY = _jspos.packer.IFB_LLLBINARY,
-    IFB_AMOUNT = _jspos.packer.IFB_AMOUNT;
-var pad = false;
-
-var ISO858387BPackager =
-/*#__PURE__*/
-function (_ISOBasePackager) {
-  _inherits(ISO858387BPackager, _ISOBasePackager);
-
-  function ISO858387BPackager() {
-    var _this;
-
-    _classCallCheck(this, ISO858387BPackager);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ISO858387BPackager).call(this));
-    var fld = [
+class ISO8583Packer extends _jspos.ISOBasePackager {
+  constructor() {
+    super();
+    let Spec = [
     /*000*/
     new IFB_NUMERIC(4, "Message Type Indicator", true),
     /*001*/
@@ -304,15 +284,11 @@ function (_ISOBasePackager) {
     new IFB_LLLCHAR(999, "Reserved for private use"),
     /*128*/
     new IFB_BINARY(8, "Message authentication code field")];
-
-    _this.setFieldPackager(fld);
-
-    return _this;
+    this.setFieldPackager(Spec);
   }
 
-  return ISO858387BPackager;
-}(_jspos.ISOBasePackager);
+}
 
-var _default = new ISO858387BPackager();
+var _default = new ISO8583Packer();
 
-exports["default"] = _default;
+exports.default = _default;

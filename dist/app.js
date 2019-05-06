@@ -6,7 +6,7 @@ var _jspos = require("jspos");
 
 var _uplink = require("./uplink");
 
-var AppSettings = _interopRequireWildcard(require("./AppSettings/"));
+var AppSettings = _interopRequireWildcard(require("./AppSettings"));
 
 var _TPDU = _interopRequireDefault(require("./Iso8583/TPDU"));
 

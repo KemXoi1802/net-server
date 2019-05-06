@@ -1,0 +1,5 @@
+const MAX_LENGTH_BUFFER = 1024;
+
+export {
+    MAX_LENGTH_BUFFER
+}
